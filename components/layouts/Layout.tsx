@@ -75,7 +75,7 @@ const Layout = (props: getProps) => {
               menus.map((menu, index) => {
                 if (menu.subMenus.length > 0) {
                   return (
-                    <li className="cursor-pointer mb-2">
+                    <li className="cursor-pointer mb-2" key={menu.menuId}>
                       <div
                         className=" w-full flex items-center py-2 rounded-lg  font-medium px-2 relative duration-100 text-gray-500 hover:bg-primary hover:text-white"
                         onClick={() =>
@@ -102,25 +102,25 @@ const Layout = (props: getProps) => {
                             active == menu.menuId ? "h-auto" : "h-0"
                           } w-full overflow-hidden`}
                         >
-                          {menu.subMenus.length > 0
-                            ? menu.subMenus.map((sub, index) => (
-                                <ul>
-                                  <Link href={sub.href}>
+                          <ul>
+                            {menu.subMenus.length > 0
+                              ? menu.subMenus.map((sub, index) => (
+                                  <Link href={sub.href} key={sub.subMeniId}>
                                     <li className="cursor-pointer w-full py-2 text-gray-500 flex items-center px-2 font-medium hover:text-primary">
                                       <GoDot className="mr-3" />
                                       {sub.title}
                                     </li>
                                   </Link>
-                                </ul>
-                              ))
-                            : null}
+                                ))
+                              : null}
+                          </ul>
                         </div>
                       )}
                     </li>
                   );
                 } else {
                   return (
-                    <Link href={menu.href}>
+                    <Link href={menu.href} key={menu.menuId}>
                       <li className="cursor-pointer w-full flex items-center py-2 rounded-lg  font-medium px-2 relative duration-100 text-gray-500 hover:bg-primary hover:text-white mb-2">
                         <FiAlignJustify className="mr-3" />
                         {toggle && (
